@@ -11,6 +11,11 @@ import {
 
 export default (state, action) => {
     switch (action.type){
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error:null
+            }
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token)
             return {
