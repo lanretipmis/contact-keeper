@@ -5,7 +5,7 @@ import Home from "./components/layout/Home";
 import About from "./components/layout/About";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import Alerts from "./components/layout/Alerts";
+import Alerts from './components/layout/Alerts'
 
 import ContactState from "./context/contact/ContactState";
 import AuthState from "./context/auth/AuthState";
