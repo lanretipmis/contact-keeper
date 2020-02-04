@@ -1,21 +1,26 @@
 import React, { useContext, useState, useEffect } from "react";
 import AlertContext from "../../context/alert/alertContext";
-import AuthContext from '../../context/auth/authContext';
+import AuthContext from "../../context/auth/authContext";
 
-const Register = () => {
+const Register = (props) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
 
-  const { register, error, clearErrors } = authContext;
+  const { register, error, clearErrors, isAuthenticated } = authContext;
 
-  useEffect(()=>{
-    if (error === 'User already exists') {
-      setAlert(error, 'danger');
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/');
+    }
+
+    if (error === "User already exists") {
+      setAlert(error, "danger");
       clearErrors();
     }
-  }, [error]);
+    //eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     name: "",
@@ -51,11 +56,23 @@ const Register = () => {
       <form onSubmit={onSubmit}>
         <div className="form-groupe">
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" value={name} onChange={onChange} required/>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={onChange}
+            required
+          />
         </div>
         <div className="form-groupe">
           <label htmlFor="email">Email Address</label>
-          <input type="email" name="email" value={email} onChange={onChange} required/>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            required
+          />
         </div>
         <div className="form-groupe">
           <label htmlFor="password">Password</label>
@@ -65,7 +82,7 @@ const Register = () => {
             value={password}
             onChange={onChange}
             required
-            minLength='6'
+            minLength="6"
           />
         </div>
         <div className="form-groupe">
@@ -76,7 +93,7 @@ const Register = () => {
             value={password2}
             onChange={onChange}
             required
-            minLength='6'
+            minLength="6"
           />
         </div>
         <input
